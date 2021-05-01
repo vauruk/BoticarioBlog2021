@@ -8,13 +8,13 @@ import { HomeRoutes } from './Home';
 export type routeName = RootRoutes | SignInRoutes | HomeRoutes;
 
 export interface BaseRoute {
-  name: routeName;
-  component: () => any;
+    name: routeName;
+    component: () => any;
 }
 
 export interface StackRoute extends BaseRoute {
-  options?: StackNavigationOptions;
+    options?: StackNavigationOptions;
 }
 export interface DrawerRoute extends BaseRoute {
-  options?: DrawerNavigationOptions;
+    options?: DrawerNavigationOptions;
 }

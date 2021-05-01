@@ -6,9 +6,11 @@
 
 import { combineReducers } from '@reduxjs/toolkit';
 import loginForm from '../login';
+import registerForm from '../register';
 
 const rootReducer = combineReducers({
-  loginForm,
+    loginForm,
+    registerForm,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -12,7 +12,7 @@ const Content = styled.View`
     width: 90%;
 `;
 
-const TextInput = styled.TextInput.attrs({})`
+const TextInput = styled.TextInput`
     flex: 1;
     margin-left: 10px;
 `;
@@ -24,9 +24,9 @@ const InputView = styled.View`
     align-items: center;
     background-color: #ffffff;
     border-radius: 20px;
-    padding-left: 10;
+    padding-left: 10px;
     margin-bottom: 5px;
-    padding-right: 10;
+    padding-right: 10px;
 `;
 
 const Title = styled.Text<ITheme>`
@@ -45,7 +45,7 @@ const Button = styled.TouchableOpacity`
     border-radius: 20px;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    width: 110%;
 `;
 const ButtonLink = styled.TouchableOpacity`
     margin-top: 10px;

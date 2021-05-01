@@ -1,14 +1,14 @@
-import { SignInRoutes } from '../SignIn';
+import { SignInRoutes } from '../SignIn/types';
 
 export enum RootRoutes {
-  index = '/',
+    index = '/',
 }
 
 export type RootStackParamsList = {
-  [RootRoutes.index]: undefined;
-  [SignInRoutes.index]: undefined;
+    [RootRoutes.index]: undefined;
+    [SignInRoutes.index]: undefined;
 };
 
 export interface Props {
-  token?: string;
+    token?: string;
 }

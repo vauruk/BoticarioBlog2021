@@ -1,10 +1,11 @@
 import { Field } from '../common/types';
+
 export interface FormState {
     loading: boolean;
-    hasCredentials: string;
     submitError: string | undefined;
     fields: {
-        username: Field;
+        name: Field;
+        email: Field;
         password: Field;
     };
 }

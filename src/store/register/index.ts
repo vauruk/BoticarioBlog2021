@@ -1,27 +1,36 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 import { FormState, SetFieldPayload } from './types';
-import { initialFieldState } from '../common/types';
+import { Field } from '../common/types';
+
+const initialFieldState: Field = {
+    value: undefined,
+    error: undefined,
+    isValid: false,
+};
 
 export const initialState: FormState = {
     loading: false,
-    hasCredentials: 'unset',
     submitError: undefined,
     fields: {
-        username: initialFieldState,
+        name: initialFieldState,
+        email: initialFieldState,
         password: initialFieldState,
     },
 };
 
-export const authorize = createAsyncThunk(
-    'loginForm/authorize',
+export const register = createAsyncThunk(
+    'registerForm/register',
     async (args = undefined, thunkAPI) => {
         const {
-            loginForm: { fields },
+            registerForm: { fields },
         } = thunkAPI.getState() as RootState;
-        const { username, password } = fields;
-        console.log('Login', username, password);
+        const { name, email, password } = fields;
+        console.log('Login', name, password, email);
         try {
+            setTimeout(() => {
+                console.log('object return payload');
+            }, 5000);
         } catch (error) {
             const {
                 response: { data },
@@ -31,8 +40,8 @@ export const authorize = createAsyncThunk(
     },
 );
 
-export const loginFormSlice = createSlice({
-    name: 'loginForm',
+export const registerFormSlice = createSlice({
+    name: 'registerForm',
     initialState,
     reducers: {
         setField(state, action: PayloadAction<SetFieldPayload>) {
@@ -43,21 +52,21 @@ export const loginFormSlice = createSlice({
         },
         logout(state) {
             const newState = { ...state };
-            newState.hasCredentials = 'dsad';
+            //  newState.hasCredentials = 'dsad';
         },
     },
     extraReducers: (builder: any) => {
-        builder.addCase(authorize.pending, (state: FormState) => {
+        builder.addCase(register.pending, (state: FormState) => {
             const newstate = { ...state };
             newstate.submitError = undefined;
             newstate.loading = true;
         });
-        builder.addCase(authorize.fulfilled, (state: FormState) => {
+        builder.addCase(register.fulfilled, (state: FormState) => {
             const newstate = { ...state };
             newstate.submitError = undefined;
             newstate.loading = false;
         });
-        builder.addCase(authorize.rejected, (state: FormState) => {
+        builder.addCase(register.rejected, (state: FormState) => {
             const newstate = { ...state };
             newstate.submitError = 'Error qualquer ';
             newstate.loading = false;
@@ -65,6 +74,6 @@ export const loginFormSlice = createSlice({
     },
 });
 
-export const { setField, logout } = loginFormSlice.actions;
+export const { setField, logout } = registerFormSlice.actions;
 
-export default loginFormSlice.reducer;
+export default registerFormSlice.reducer;
