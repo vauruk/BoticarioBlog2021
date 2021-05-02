@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { ImageVK } from '../../components';
 import {
     Container,
     TextInput,
@@ -11,22 +10,33 @@ import {
     ButtonLabel,
     ButtonLink,
     LinkLabel,
+    ImageSignVK,
+    ScrollViewAppVk,
 } from './styles';
-import { theme } from '../../theme';
+
+import { IconVK } from '../common/styles';
 import { Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import boticario from '../../assets/gb.png';
 import { SignInRoutes } from '../../routes/SignIn/types';
 import { useAppDispatch, useTypedSelector } from '../../store';
-import { setField } from '../../store/login';
+import { authorize, setField } from '../../store/login';
+import { userAlertVK } from '../../hooks';
 
-const SignIn = () => {
+const SignIn = props => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
     const username = useTypedSelector(state => state.loginForm.fields.username);
+    const loading = useTypedSelector(state => state.loginForm.loading);
+    // const token = useTypedSelector(state => state.loginForm.token);
+    const submitError = useTypedSelector(state => state.loginForm.submitError);
+    const typeMessage = useTypedSelector(state => state.loginForm.typeMessage);
+    const alert = userAlertVK({
+        type: typeMessage,
+        message: submitError,
+    });
 
-    console.log('Username', username);
+    console.log('Username', username, loading);
     const hideKeyboard = () => {
         Keyboard.dismiss();
     };
@@ -38,42 +48,54 @@ const SignIn = () => {
     const onChangeText = (text: string, fieldName: any) => {
         dispatch(setField({ fieldName: fieldName, value: text }));
     };
+    const onAutorize = () => {
+        dispatch(authorize());
+    };
     return (
         <Container>
-            <ImageVK source={boticario} width={150} height={230} />
-            <Title>Boticario Blog</Title>
-            <Content>
-                <InputView>
-                    <IconFA name="at" size={20} color={theme.primaryColor} />
-                    <TextInput
-                        onChangeText={(text: string) =>
-                            onChangeText(text, 'username')
-                        }
-                        placeholder="Email"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        maxLength={100}
-                    />
-                </InputView>
-                <InputView>
-                    <IconFA name="key" size={20} color={theme.primaryColor} />
-                    <TextInput
-                        onChangeText={(text: string) =>
-                            onChangeText(text, 'password')
-                        }
-                        autoCapitalize="none"
-                        placeholder="********"
-                        secureTextEntry
-                        autoCompleteType="password"
-                    />
-                </InputView>
-                <Button onPress={() => console.log('button clicado')}>
-                    <ButtonLabel>Login</ButtonLabel>
-                </Button>
-            </Content>
-            <ButtonLink onPress={navRegister}>
-                <LinkLabel>Cadastrar Usuário</LinkLabel>
-            </ButtonLink>
+            {alert}
+            <ScrollViewAppVk>
+                <ImageSignVK
+                    testID="testId12"
+                    source={boticario}
+                    width={130}
+                    height={180}
+                />
+                <Title testID="testId13">Boticario Blog</Title>
+                <Content>
+                    <InputView>
+                        <IconVK name="at" size={20} />
+                        <TextInput
+                            testID="testId15"
+                            onChangeText={(text: string) =>
+                                onChangeText(text, 'username')
+                            }
+                            placeholder="Email"
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            maxLength={100}
+                        />
+                    </InputView>
+                    <InputView testID="testId16">
+                        <IconVK name="key" size={20} />
+                        <TextInput
+                            onChangeText={(text: string) =>
+                                onChangeText(text, 'password')
+                            }
+                            autoCapitalize="none"
+                            placeholder="********"
+                            secureTextEntry
+                            autoCompleteType="password"
+                        />
+                    </InputView>
+                    <Button testID="testId16" onPress={onAutorize}>
+                        <ButtonLabel>Login</ButtonLabel>
+                    </Button>
+                    <ButtonLink testID="testId17" onPress={navRegister}>
+                        <LinkLabel>Cadastrar</LinkLabel>
+                    </ButtonLink>
+                </Content>
+            </ScrollViewAppVk>
         </Container>
     );
 };

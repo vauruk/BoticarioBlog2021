@@ -1,15 +1,21 @@
 import styled from 'styled-components/native';
-import { KeyboardAvoidingView, Pressable } from 'react-native';
+import { KeyboardAvoidingView, Pressable, ScrollView } from 'react-native';
 import { ITheme } from '../../theme/types';
-import { ContainerViewVK } from '../../components';
+import { ContainerVK, ImageVK, ScrollViewVk } from '../../components';
 
-const Container = styled(ContainerViewVK).attrs()``;
+const Container = styled(ContainerVK).attrs()``;
+const ImageSignVK = styled(ImageVK).attrs()`
+    margin-top: 20px;
+`;
 
 const Content = styled.View`
     background-color: #e2e3e2;
     padding: 30px;
     border-radius: 10px;
     width: 90%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 const TextInput = styled.TextInput.attrs({})`
@@ -22,7 +28,7 @@ const InputView = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: ${(props: any) => props.theme.white};
     border-radius: 20px;
     padding-left: 10;
     margin-bottom: 5px;
@@ -48,25 +54,24 @@ const Button = styled.TouchableOpacity`
     margin-top: 20px;
 `;
 const ButtonLink = styled.TouchableOpacity`
-    margin-top: 10px;
     padding: 10px;
     border-radius: 20px;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-start;
 `;
 
 const ButtonLabel = styled.Text`
     font-size: 15px;
-    color: #ffffff;
+    color: ${(props: any) => props.theme.white};
 `;
 
 const LinkLabel = styled.Text`
     font-size: 15px;
-    color: #000000;
+    color: ${(props: any) => props.theme.blue};
 `;
 
 const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
-    keyboardVerticalOffset: 10,
+    keyboardVerticalOffset: 30,
     behavior: 'padding',
 })`
     flex: 1;
@@ -76,9 +81,13 @@ const HandlerContainer = styled(Pressable)`
     flex: 1;
 `;
 
+const ScrollViewAppVk = styled(ScrollViewVk).attrs({})``;
+
 export {
     Container,
     Title,
+    ImageSignVK,
+    ScrollViewAppVk,
     SubTitle,
     Button,
     Content,

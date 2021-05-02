@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 import { KeyboardAvoidingView, Pressable } from 'react-native';
 import { ITheme } from '../../theme/types';
-import { ContainerViewVK } from '../../components';
+import { ContainerVK, ColVK, RowVK, ScrollViewVK } from '../../components';
 
-const Container = styled(ContainerViewVK).attrs()``;
+const Container = styled(ContainerVK).attrs()``;
 
 const Content = styled.View`
     background-color: #e2e3e2;
@@ -22,7 +22,7 @@ const InputView = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: ${(props: any) => props.theme.white};
     border-radius: 20px;
     padding-left: 10px;
     margin-bottom: 5px;
@@ -57,12 +57,12 @@ const ButtonLink = styled.TouchableOpacity`
 
 const ButtonLabel = styled.Text`
     font-size: 15px;
-    color: #ffffff;
+    color: ${(props: any) => props.theme.white};
 `;
 
 const LinkLabel = styled.Text`
     font-size: 15px;
-    color: #000000;
+    color: ${(props: any) => props.theme.black};
 `;
 
 const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
@@ -75,11 +75,23 @@ const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
 const HandlerContainer = styled(Pressable)`
     flex: 1;
 `;
+const Row = styled(RowVK)`
+    margin-top: 10px;
+`;
+const ColA = styled(ColVK)`
+    padding-right: 10px;
+    padding-left: 7px;
+`;
+const ColB = styled(ColVK)`
+    padding-left: 10px;
+`;
 
+const ScrollViewAppVk = styled(ScrollViewVK).attrs({})``;
 export {
     Container,
     Title,
     SubTitle,
+    ScrollViewAppVk,
     Button,
     Content,
     TextInput,
@@ -87,6 +99,9 @@ export {
     LinkLabel,
     ButtonLabel,
     ButtonLink,
+    Row,
+    ColA,
+    ColB,
     WrapperKeyboard,
     HandlerContainer,
 };

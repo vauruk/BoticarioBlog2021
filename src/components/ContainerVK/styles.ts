@@ -4,8 +4,6 @@ import { KeyboardAvoidingView, Pressable } from 'react-native';
 const ContainerVK = styled.View`
     background-color: ${(props: any) => props.theme.backgroundColor};
     flex: 1;
-    justify-content: center;
-    align-items: center;
 `;
 
 const KeyboardAvoidingViewVK = styled(KeyboardAvoidingView).attrs({

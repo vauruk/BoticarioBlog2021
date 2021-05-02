@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 import { FormState, SetFieldPayload, AutorizeResponse } from './types';
-import { initialFieldState, Field } from '../common/types';
-import { TypeMessage } from '../../components/AlertVK/types';
+import { initialFieldState } from '../common/types';
 
 export const initialState: FormState = {
     loading: false,
@@ -13,8 +12,7 @@ export const initialState: FormState = {
         password: initialFieldState,
     },
 };
-const userAdmin = 'admin';
-const userPassword = 'admin';
+
 export const authorize = createAsyncThunk(
     'loginForm/authorize',
     async (args = undefined, thunkAPI) => {
@@ -22,26 +20,13 @@ export const authorize = createAsyncThunk(
             loginForm: { fields },
         } = thunkAPI.getState() as RootState;
         const { username, password } = fields;
-        console.log(
-            'username === userAdmin && password === userPassowrd',
-            username.value,
-            userAdmin,
-            username.value === userAdmin,
-        );
+        console.log('Login', username, password);
         try {
-            if (
-                username.value === userAdmin &&
-                password.value === userPassword
-            ) {
-                return {
-                    name: 'vanderson',
-                    token: 'asdsaioaioidsaoidyuyu8787',
-                } as AutorizeResponse;
-            } else {
-                throw { data: { error: 'Usuário ou senha estão incorretos.' } };
-            }
+            return {
+                name: 'vanderson',
+                token: 'asdsaioaioidsaoidyuyu8787',
+            } as AutorizeResponse;
         } catch (error) {
-            console.log('Error: ', error);
             const {
                 response: { data },
             } = error;
@@ -54,13 +39,13 @@ export const loginFormSlice = createSlice({
     name: 'loginForm',
     initialState,
     reducers: {
-        setField(state: FormState, action: PayloadAction<SetFieldPayload>) {
+        setField(state, action: PayloadAction<SetFieldPayload>) {
             const { fieldName, value } = action.payload;
             console.log(fieldName, value);
             const field = state.fields[fieldName];
             field.value = value;
         },
-        logout(state: FormState) {
+        logout(state) {
             const newState = { ...state };
             newState.token = undefined;
         },
@@ -83,18 +68,11 @@ export const loginFormSlice = createSlice({
                 return newstate;
             },
         );
-        builder.addCase(
-            authorize.rejected,
-            (state: FormState, action: PayloadAction<any>) => {
-                const newstate = { ...state };
-                const { error } = action;
-                console.log('authorize.rejected', error);
-                newstate.submitError = 'Usuário ou senha estão incorretos.';
-                newstate.typeMessage = TypeMessage.error;
-                newstate.loading = false;
-                return newstate;
-            },
-        );
+        builder.addCase(authorize.rejected, (state: FormState) => {
+            const newstate = { ...state };
+            newstate.submitError = 'Error qualquer ';
+            newstate.loading = false;
+        });
     },
 });
 

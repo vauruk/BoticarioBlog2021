@@ -1,37 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
-import { Container, Content, Label, Title } from './styles';
-import { ImageVK, RowVK, ColVK } from '../../components';
-import { ActivityIndicator } from 'react-native';
-import IconFA from 'react-native-vector-icons/FontAwesome';
+import {
+    Container,
+    Content,
+    Label,
+    Title,
+    ColA,
+    ColB,
+    Row,
+    LabelLink,
+    ActivityIndicatorVK,
+} from './styles';
+import { ImageVK } from '../../components';
+import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SignInRoutes } from '../../routes/SignIn/types';
+import { Props } from './types';
+import { IconVK } from '../common/styles';
 import vanderson from '../../assets/vanderson.png';
 
-const Splash = () => {
+const Splash: React.FC<Props> = (props: Props) => {
     const navigation = useNavigation();
     useEffect(() => {
         setTimeout(() => {
-            console.log('object timeout');
             navigation.navigate(SignInRoutes.Login);
         }, 5000);
     });
+    const gitHub: string = 'https://github.com/vauruk';
+    const handlePress = useCallback(async () => {
+        await Linking.openURL(gitHub);
+    }, [gitHub]);
 
     return (
         <Container>
             <Content>
                 <ImageVK source={vanderson} width={250} height={300} />
                 <Title>Vanderson de Moura Vauruk</Title>
-                <Label>vauruk@gmail.com</Label>
-                <RowVK style={{ paddingLeft: 10, paddingRight: 10 }}>
-                    <ColVK flex={0.1}>
-                        <IconFA name="save" size={30} color="#900" />
-                    </ColVK>
-                    <ColVK flex={0.9}>
-                        <Label>http://github.com/vauruk</Label>
-                    </ColVK>
-                </RowVK>
-                <ActivityIndicator size="large" color="#ec771a" />
+                <Row>
+                    <ColA flex={0.2}>
+                        <IconVK name="at" size={30} />
+                    </ColA>
+                    <ColB flex={0.8}>
+                        <Label>vauruk@gmail.com</Label>
+                    </ColB>
+                </Row>
+                <Row>
+                    <ColA flex={0.2}>
+                        <IconVK name="github" size={30} />
+                    </ColA>
+                    <ColB flex={0.8}>
+                        <LabelLink onPress={() => handlePress()}>
+                            {gitHub}
+                        </LabelLink>
+                    </ColB>
+                </Row>
+                <ActivityIndicatorVK size="large" />
             </Content>
         </Container>
     );

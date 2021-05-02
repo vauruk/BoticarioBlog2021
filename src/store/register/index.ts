@@ -26,7 +26,7 @@ export const register = createAsyncThunk(
             registerForm: { fields },
         } = thunkAPI.getState() as RootState;
         const { name, email, password } = fields;
-        console.log('Login', name, password, email);
+        console.log('Register', name, password, email);
         try {
             setTimeout(() => {
                 console.log('object return payload');

@@ -7,21 +7,36 @@ const ContainerVK = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: red;
 `;
 
 const ContentVK = styled.View<Pick<Props, 'width' | 'height'>>`
-    width: ${({ width }) => Number(width)};
-    height: ${({ height }) => Number(height)};
-    background-color: red;
+    ${({ width }) =>
+        width &&
+        `
+     width: ${width}px;
+  `}
+    ${({ height }) =>
+        height &&
+        `
+     height: ${height}px;
+  `}
 `;
+
 const HandlerContainerVK = styled(Pressable)``;
 
 const ImageStyledVK = styled.Image.attrs({ resizeMode: 'stretch' })<
     Pick<Props, 'width' | 'height'>
 >`
-    width: ${({ width }) => Number(width)}px;
-    height: ${({ height }) => Number(height)}px;
+    ${({ width }) =>
+        width &&
+        `
+     width: ${width}px;
+  `}
+    ${({ height }) =>
+        height &&
+        `
+     height: ${height}px;
+  `}
 `;
 
 export { ContainerVK, ContentVK, ImageStyledVK, HandlerContainerVK };

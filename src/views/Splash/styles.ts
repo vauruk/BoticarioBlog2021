@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
+import { ActivityIndicator } from 'react-native';
 import { ITheme } from '../../theme/types';
+import { RowVK, ColVK } from '../../components';
 
 const Container = styled.View`
     background-color: ${(props: any) => props.theme.backgroundColor};
@@ -15,6 +17,7 @@ const Content = styled.View`
 `;
 
 const Title = styled.Text<ITheme>`
+    padding-top: 15px;
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;
 `;
@@ -24,9 +27,40 @@ const Label = styled.Text`
     font-size: ${(props: any) => props.theme.text.fontSize}px;
     padding: 10px;
 `;
+const LabelLink = styled.Text`
+    color: ${(props: any) => props.theme.text.color};
+    font-size: ${(props: any) => props.theme.text.fontSize}px;
+    padding: 10px;
+    text-decoration-line: underline;
+`;
 
 const Button = styled.TouchableOpacity`
-    background-color: #ee4433;
     padding: 10px;
 `;
-export { Container, Title, Button, Label, Content };
+
+const Row = styled(RowVK)`
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+const ColA = styled(ColVK)`
+    align-items: flex-end;
+`;
+const ColB = styled(ColVK)`
+    align-items: flex-start;
+`;
+
+const ActivityIndicatorVK = styled(ActivityIndicator).attrs(({ theme }) => ({
+    color: theme.primaryColor,
+}))``;
+export {
+    Container,
+    Title,
+    Button,
+    Label,
+    LabelLink,
+    Content,
+    Row,
+    ColA,
+    ColB,
+    ActivityIndicatorVK,
+};

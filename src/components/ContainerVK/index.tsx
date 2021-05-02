@@ -5,7 +5,7 @@ import {
     HandlerContainerVK,
     ContainerVK,
 } from './styles';
-import { Platform, Keyboard } from 'react-native';
+import { Platform, Keyboard, SafeAreaView } from 'react-native';
 
 const ContainerViewVK: React.FC<Props> = ({ children, testID }: Props) => {
     const hideKeyboard = () => {
@@ -13,6 +13,7 @@ const ContainerViewVK: React.FC<Props> = ({ children, testID }: Props) => {
     };
     return (
         <>
+            <SafeAreaView />
             <KeyboardAvoidingViewVK
                 testID={testID}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>

@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { ITheme } from '../../theme/types';
+import { ScrollViewVK } from '../../components';
 
 const Container = styled.View`
     background-color: ${(props: any) => props.theme.backgroundColor};
@@ -22,4 +23,6 @@ const Button = styled.TouchableOpacity`
     background-color: #ee4433;
     padding: 10px;
 `;
-export { Container, Title, Button, Label };
+
+const ScrollViewAppVk = styled(ScrollViewVK).attrs({})``;
+export { Container, Title, Button, Label, ScrollViewAppVk };

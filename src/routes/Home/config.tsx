@@ -13,25 +13,24 @@ const routes: DrawerRoute[] = [
         options: {
             headerShown: true,
             title: 'Inicial',
-            labelStyle: { marginLeft: 240 },
             drawerIcon: () => (
                 <IconFA name="home" size={20} color={theme.primaryColor} />
             ),
-            headerTitle: () => <Text>HomeLogado</Text>,
+            headerTitle: () => <Text>News</Text>,
         },
     },
-    {
-        name: HomeRoutes.ListOrder,
-        component: () => <ListOrder />,
-        options: {
-            headerShown: true,
-            title: 'Listar Pedidos',
-            drawerIcon: () => (
-                <IconFA name="list-alt" size={20} color={theme.primaryColor} />
-            ),
-            headerTitle: () => <Text>Listar Pedido</Text>,
-        },
-    },
+    // {
+    //     name: HomeRoutes.ListOrder,
+    //     component: () => <ListOrder />,
+    //     options: {
+    //         headerShown: true,
+    //         title: 'Listar Pedidos',
+    //         drawerIcon: () => (
+    //             <IconFA name="list-alt" size={20} color={theme.primaryColor} />
+    //         ),
+    //         headerTitle: () => <Text>Listar Pedido</Text>,
+    //     },
+    // },
 ];
 
 export { routes };
