@@ -26,7 +26,7 @@
  **[Ducks pattern]( https://github.com/erikras/ducks-modular-redux)**
   
 
-#### Estrutura de pastas
+#### Estrutura de pastas e uma explicação sucinta:
 
 ```
 Descrição da disposição da arquitetura, foi utilizado a sufixo VK - sigla de Vauruk
