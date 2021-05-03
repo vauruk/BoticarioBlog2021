@@ -48,7 +48,6 @@ Descrição da disposição da arquitetura, foi utilizado a sufixo VK - sigla de
     ¦   +---RowVK
     ¦   +---ScrollViewVK
     ¦   +---index.ts - centralizador dos componentes para expor para o restante da arquitetura 
-
     +---config --> fica centralizado os arquivos de configuração, atualmente utilizando somente .env
     +---hooks --> fica centralizados hooks (componentes stateless)
     +---routes --> routes sao dividos por dominios (Logado e Nao Logado) - centralizados no Root
