@@ -15,6 +15,10 @@
  
  **[TypeScript 3.8.3](https://www.typescriptlang.org/docs/)**
  
+ **[Prettier](https://prettier.io/docs/en/index.html)**
+ 
+ **[Prettier](https://prettier.io/docs/en/index.html)**
+ 
  ## Patterns usados
  **Estrutura de componentes baseado em:**
  
