@@ -26,7 +26,58 @@
  **[Ducks pattern]( https://github.com/erikras/ducks-modular-redux)**
   
 
-#### Libs a serem instaladas
+#### Estrutura de pastas
+
+```
+Descrição da disposição da arquitetura, foi utilizado a sufixo VK - sigla de Vauruk
+
++---src
+    +---assets --> ficam as imagems design necessárias para o projeto
+    +---components --> ficam os componentes principais 
+    ¦   +---AlertVK 
+    ¦       +---index.tsx --> (fica os componentes do componente)
+    ¦       +---styles.ts --> (contem estilos para os componentes utilizados nas telas)
+    ¦       +---types.tsx --> (tipos relacionados a tela)
+    ¦   +---ColVK
+    ¦   +---ContainerVK
+    ¦   +---ImageVK
+    ¦   +---RowVK
+    ¦   +---ScrollViewVK
+    ¦   +---index.ts - centralizador dos componentes para expor para o restante da arquitetura 
+
+    +---config --> fica centralizado os arquivos de configuração, atualmente utilizando somente .env
+    +---hooks --> fica centralizados hooks (componentes stateless)
+    +---routes --> routes sao dividos por dominios (Logado e Nao Logado) - centralizados no Root
+    ¦   +---Home
+    ¦   +---Root
+    ¦   +---SideBar
+    ¦   +---SignIn
+    ¦   +---intex.ts
+    ¦   +---routes.tsx
+    ¦   +---types.ts
+    +---services
+    ¦   +---blog
+    ¦   +---login
+    ¦   +---ApiVK.ts --> Generalização Axios (nesse ponto eu posso trocar a API de acesso a rest ou qualquer resultado de serviços)
+    ¦   +---types.ts
+    +---store (config Redux)
+    ¦   +---blog
+    ¦   +---reducers
+    ¦   +---common --> contem types em comum entre os reducers
+    ¦   +---login
+    ¦   +---register
+    ¦   +---index.ts
+    +---theme (centraliza o theme para o styled-component)
+    +---views (local definido para as screens dos projetos)
+    ¦   +---Home
+    ¦       +---index.tsx --> (fica os componentes de tela)
+    ¦       +---styles.ts --> (contem estilos para os componentes utilizados nas telas)
+    ¦       +---types.tsx --> (tipos relacionados a tela)
+    ¦   +---Register
+    ¦   +---SignIn
+    ¦   +---index.ts
+    
+```
 
 
 #Antes de rodar o projeto
