@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
-import { KeyboardAvoidingView, Pressable, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Pressable, Platform } from 'react-native';
 import { ITheme } from '../../theme/types';
-import { ContainerVK, ImageVK, ScrollViewVk } from '../../components';
+import { ContainerVK, ImageVK, ScrollViewVK } from '../../components';
 
 const Container = styled(ContainerVK).attrs()``;
 const ImageSignVK = styled(ImageVK).attrs()`
@@ -30,9 +30,9 @@ const InputView = styled.View`
     align-items: center;
     background-color: ${(props: any) => props.theme.white};
     border-radius: 20px;
-    padding-left: 10;
+    padding-left: 10px;
     margin-bottom: 5px;
-    padding-right: 10;
+    padding-right: 10px;
 `;
 
 const Title = styled.Text<ITheme>`
@@ -71,8 +71,8 @@ const LinkLabel = styled.Text`
 `;
 
 const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
-    keyboardVerticalOffset: 30,
-    behavior: 'padding',
+    keyboardVerticalOffset: 500,
+    behavior: Platform.OS === 'ios' ? 'padding' : 'height',
 })`
     flex: 1;
 `;
@@ -81,7 +81,7 @@ const HandlerContainer = styled(Pressable)`
     flex: 1;
 `;
 
-const ScrollViewAppVk = styled(ScrollViewVk).attrs({})``;
+const ScrollViewAppVk = styled(ScrollViewVK).attrs({})``;
 
 export {
     Container,

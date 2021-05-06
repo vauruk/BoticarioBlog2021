@@ -13,7 +13,7 @@ export const initialState: FormState = {
         password: initialFieldState,
     },
 };
-const userAdmin = 'admin';
+const userAdmin = 'admin@admin.com';
 const userPassword = 'admin';
 export const authorize = createAsyncThunk(
     'loginForm/authorize',
@@ -22,12 +22,6 @@ export const authorize = createAsyncThunk(
             loginForm: { fields },
         } = thunkAPI.getState() as RootState;
         const { username, password } = fields;
-        console.log(
-            'username === userAdmin && password === userPassowrd',
-            username.value,
-            userAdmin,
-            username.value === userAdmin,
-        );
         try {
             if (
                 username.value === userAdmin &&
@@ -56,7 +50,6 @@ export const loginFormSlice = createSlice({
     reducers: {
         setField(state: FormState, action: PayloadAction<SetFieldPayload>) {
             const { fieldName, value } = action.payload;
-            console.log(fieldName, value);
             const field = state.fields[fieldName];
             field.value = value;
         },

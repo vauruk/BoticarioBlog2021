@@ -4,3 +4,5 @@ export { default as RowVK } from './RowVK';
 export { default as ColVK } from './ColVK';
 export { default as AlertVK } from './AlertVK';
 export { default as ScrollViewVK } from './ScrollViewVK';
+export { default as ItemNewsVK } from './ItemNewsVK';
+export { default as ItemBlogVK } from './ItemBlogVK';

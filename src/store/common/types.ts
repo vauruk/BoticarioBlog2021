@@ -1,5 +1,5 @@
 export interface Field {
-    value: number | string | undefined;
+    value: string | undefined;
     isValid: boolean;
     error: string | undefined;
 }

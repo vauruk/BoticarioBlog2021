@@ -5,13 +5,12 @@ import { ScrollViewVK } from '../../components';
 const Container = styled.View`
     background-color: ${(props: any) => props.theme.backgroundColor};
     flex: 1;
-    justify-content: center;
-    align-items: center;
 `;
 
 const Title = styled.Text<ITheme>`
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;
+    background-color: yellow;
 `;
 
 const Label = styled.Text`

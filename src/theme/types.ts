@@ -5,6 +5,8 @@ export interface ITheme {
     white: string;
     black: string;
     blue: string;
+    gray2: string;
+    ligthGrayColor: string;
     errorColor: string;
     successColor: string;
     warningColor: string;

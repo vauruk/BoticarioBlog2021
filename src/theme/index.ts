@@ -4,6 +4,8 @@ const color = {
     primary: '#ec771a',
     secondary: '#ffee44',
     gray: '#334455',
+    gray2: '#ebebeb',
+    ligthGray: '#d2d2d2',
     white: '#fffeff',
     black: '#000000',
     blue: '#1A3668',
@@ -19,15 +21,25 @@ const theme: ITheme = {
     white: color.white,
     black: color.black,
     blue: color.blue,
+    gray2: color.gray2,
     errorColor: color.error,
     warningColor: color.warning,
     successColor: color.success,
+    ligthGrayColor: color.ligthGray,
     title: {
         fontSize: 30,
         color: color.gray,
     },
     text: {
-        fontSize: 20,
+        fontSize: 18,
+        color: color.gray,
+    },
+    blogText: {
+        fontSize: 14,
+        color: color.gray,
+    },
+    smallText: {
+        fontSize: 15,
         color: color.gray,
     },
     titleHeader: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Props } from './types';
 import { ContentVK, ImageStyledVK } from './styles';
+import empty from '../../assets/empty.png';
 
 const ImageVK: React.FC<Props> = ({
     testID,
@@ -17,6 +18,7 @@ const ImageVK: React.FC<Props> = ({
                     source={source}
                     width={width}
                     height={height}
+                    defaultSource={empty}
                 />
             </ContentVK>
         </>

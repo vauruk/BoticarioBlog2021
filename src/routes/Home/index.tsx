@@ -3,11 +3,17 @@ import { HomeDrawerParamsList } from './types';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { routes } from './config';
 import CustomDrawerContent from '../SideBar';
+import { theme } from '../../theme';
 
 const Drawer = createDrawerNavigator<HomeDrawerParamsList>();
 
 const HomeNavigator = () => (
     <Drawer.Navigator
+        drawerContentOptions={{
+            activeTintColor: theme.ligthGrayColor,
+            // itemStyle: { marginVertical: 30 },
+        }}
+        drawerStyle={{}}
         drawerContent={props => <CustomDrawerContent {...props} />}>
         {routes.map(route => (
             <Drawer.Screen

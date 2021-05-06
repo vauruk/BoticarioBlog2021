@@ -36,7 +36,6 @@ const SignIn = props => {
         message: submitError,
     });
 
-    console.log('Username', username, loading);
     const hideKeyboard = () => {
         Keyboard.dismiss();
     };

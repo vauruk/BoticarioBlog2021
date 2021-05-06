@@ -30,8 +30,8 @@ export default class HttpClient {
         return new Promise<U>((resolve, reject) => {
             const { path, payload, token } = parameters;
             const options: AxiosRequestConfig = token
-                ? optionsAuth
-                : optionsNoAuth;
+                ? optionsAuth(token)
+                : optionsNoAuth();
 
             axios
                 .post(path, payload, options)
@@ -41,13 +41,12 @@ export default class HttpClient {
                 .catch((error: any) => reject(error));
         });
     }
-    static get<U>(parameters: IHttpClientRequestParameters): Promise<U> {
+    static get<T, U>(parameters: IHttpClientRequestParameters<T>): Promise<U> {
         return new Promise<U>((resolve, reject) => {
             const { path, token } = parameters;
             const options: AxiosRequestConfig = token
-                ? optionsAuth
-                : optionsNoAuth;
-
+                ? optionsAuth(token)
+                : optionsNoAuth();
             axios
                 .get(path, options)
                 .then((response: any) => {

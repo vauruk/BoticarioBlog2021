@@ -46,7 +46,6 @@ export const registerFormSlice = createSlice({
     reducers: {
         setField(state, action: PayloadAction<SetFieldPayload>) {
             const { fieldName, value } = action.payload;
-            console.log(fieldName, value);
             const field = state.fields[fieldName];
             field.value = value;
         },

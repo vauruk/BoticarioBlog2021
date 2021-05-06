@@ -1,5 +1,5 @@
 export interface IHttpClientRequestParameters<T> {
     path: string;
-    token: string;
+    token: string | undefined;
     payload?: T;
 }

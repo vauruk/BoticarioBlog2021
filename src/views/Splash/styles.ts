@@ -44,6 +44,7 @@ const Row = styled(RowVK)`
 `;
 const ColA = styled(ColVK)`
     align-items: flex-end;
+    justify-content: center;
 `;
 const ColB = styled(ColVK)`
     align-items: flex-start;

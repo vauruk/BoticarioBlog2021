@@ -1,31 +1,39 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'store';
-import { FormState, SetFieldPayload, AutorizeResponse } from './types';
-import { initialFieldState } from '../common/types';
+import { RootState } from '../../store';
+import { FormState, TextPost, Blog, User, Message } from './types';
+import md5 from 'crypto-js/md5';
+import moment from 'moment-timezone';
+import { blogList } from '../mock/blogList';
+
+const loadGravatar = (email: string) => {
+    const gravatarUrl = 'https://www.gravatar.com/avatar/';
+    // let hashGravatar = crypto.createHash('md5').update(email).digest("hex");
+    let hashGravatar = md5(email);
+    let url = gravatarUrl + hashGravatar + '?d=mp&s=50';
+    return url;
+};
 
 export const initialState: FormState = {
     loading: false,
-    token: undefined,
     submitError: undefined,
-    fields: {
-        username: initialFieldState,
-        password: initialFieldState,
-    },
+    blogList: blogList,
+    post: undefined,
+    textPost: '',
 };
 
-export const authorize = createAsyncThunk(
-    'loginForm/authorize',
+export const fetchBlogList = createAsyncThunk(
+    'blogForm/list',
     async (args = undefined, thunkAPI) => {
         const {
-            loginForm: { fields },
+            blogListForm: { blogList },
         } = thunkAPI.getState() as RootState;
-        const { username, password } = fields;
-        console.log('Login', username, password);
+
         try {
-            return {
-                name: 'vanderson',
-                token: 'asdsaioaioidsaoidyuyu8787',
-            } as AutorizeResponse;
+            /**
+             * Aqui seria o ponto que se conecta com os serviços se necessario
+             */
+            // const dataReturn = BlogService.listData();
+            // return dataReturn;
         } catch (error) {
             const {
                 response: { data },
@@ -35,40 +43,57 @@ export const authorize = createAsyncThunk(
     },
 );
 
-export const loginFormSlice = createSlice({
-    name: 'loginForm',
+export const blogFormSlice = createSlice({
+    name: 'blogForm',
     initialState,
     reducers: {
-        setField(state, action: PayloadAction<SetFieldPayload>) {
-            const { fieldName, value } = action.payload;
-            console.log(fieldName, value);
-            const field = state.fields[fieldName];
-            field.value = value;
+        setPostTextAction(state, action: PayloadAction<TextPost>) {
+            const { value } = action.payload;
+            const newstate = { ...state };
+            newstate.textPost = value;
+            return newstate;
         },
-        logout(state) {
-            const newState = { ...state };
-            newState.token = undefined;
+        addPost(state, action: PayloadAction<TextPost>) {
+            const { value, email } = action.payload;
+            const user: User = {
+                name: email.substring(0, email.indexOf('@')),
+                email: email,
+                profile_picture: loadGravatar(email),
+            };
+            const message: Message = {
+                uuid: Math.floor(Math.random() * 10000),
+                content: value,
+                created_at: moment().utc().format(), //'2021-02-02T15:10:33Z'
+            };
+            const blog: Blog = {
+                message,
+                user,
+            };
+            console.log('addPost', blog);
+            const newstate = { ...state };
+            newstate.blogList.push(blog);
         },
     },
     extraReducers: (builder: any) => {
-        builder.addCase(authorize.pending, (state: FormState) => {
+        builder.addCase(fetchBlogList.pending, (state: FormState) => {
             const newstate = { ...state };
             newstate.submitError = undefined;
             newstate.loading = true;
         });
         builder.addCase(
-            authorize.fulfilled,
-            (state: FormState, action: PayloadAction<AutorizeResponse>) => {
+            fetchBlogList.fulfilled,
+            (state: FormState, action: PayloadAction<NewsResponse>) => {
                 const newstate = { ...state };
-                const { name, token } = action.payload;
-                console.log('authorize.fulfilled', newstate, name, token);
+                const { news } = action.payload;
+                console.log('authorize.fulfilled', news);
                 newstate.submitError = undefined;
+                newstate.blogList = news;
+
                 newstate.loading = false;
-                newstate.token = token;
                 return newstate;
             },
         );
-        builder.addCase(authorize.rejected, (state: FormState) => {
+        builder.addCase(fetchBlogList.rejected, (state: FormState) => {
             const newstate = { ...state };
             newstate.submitError = 'Error qualquer ';
             newstate.loading = false;
@@ -76,6 +101,6 @@ export const loginFormSlice = createSlice({
     },
 });
 
-export const { setField, logout } = loginFormSlice.actions;
+export const { setPostTextAction, addPost } = blogFormSlice.actions;
 
-export default loginFormSlice.reducer;
+export default blogFormSlice.reducer;
