@@ -1,5 +1,15 @@
 # BoticarioBlog2021
 
+## 
+
+## App Screen
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 39 05](https://user-images.githubusercontent.com/12579082/118005582-e2c7c380-b320-11eb-9646-54b5892ead97.png)
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 39 12](https://user-images.githubusercontent.com/12579082/118005588-e3605a00-b320-11eb-9b73-44ecad75fee9.png)
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 48 30](https://user-images.githubusercontent.com/12579082/118005557-dfccd300-b320-11eb-81c3-c5dc676a8c1a.png)
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 38 56](https://user-images.githubusercontent.com/12579082/118005562-e0fe0000-b320-11eb-9616-d4c0065403de.png)
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 39 02](https://user-images.githubusercontent.com/12579082/118005579-e22f2d00-b320-11eb-8dd8-6c4380e7e4c3.png)
+![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 38 58](https://user-images.githubusercontent.com/12579082/118005567-e1969680-b320-11eb-9ca8-9786a3943980.png)
+
 ## Libs Utilizadas
  **[Node 16.0.0](https://nodejs.org/en/).**
  
