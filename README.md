@@ -156,4 +156,8 @@ a iniciar o projeto sem cache no computador que ira executar
 - Run iOS: `yarn ios`
 - Run Android: `yarn android`
 
+## Distro
+- Foi criado uma pasta na raiz do projeto com um APK para testes:
+- `/dist/BoticarioBlog2021-v1.0.2.apk`
+
 
