@@ -1,6 +1,51 @@
 # BoticarioBlog2021
 
-## 
+## Descrição funcionalidades
+
+Design escolhido limpo e com cor predominando branco e outras cores usando a paleta de cores da Logo Utilizada
+
+- Tela de splash screen com informações sobre você, fique à vontade pra
+apresentar seu nome, e-mail uma foto divertida sua. Mas se quiser só
+colocar uma logo do seu produto, tá valendo ;)
+ ```
+ Concluído com conforme descrito
+ ```
+- Tela de login para informar e-mail e senha;
+ ```
+ Concluído com conforme descrito
+ ```
+- Tela de cadastro de um novo usuário solicitando nome, e-mail e senha;
+ ```
+ Concluído com conforme descrito
+ ```
+- Tela para listar postagens de até 280 caracteres, exibindo nome da pessoa que
+postou, data do post e texto do post;
+ ```
+ Concluído com conforme descrito
+ ```
+- Tela para listar as últimas novidades do Boticário.
+ ```
+ Concluído com conforme descrito
+ ```
+- Tela para fazer um novo post solicitando apenas um campo de texto;
+ ```
+ Concluído com conforme descrito, mas eu deixei na mma tela que temos as postagens, 
+ melhoria o qual nao deu tempo de implementar que eu imaginei 
+ seria um campo ocultavel, ou uma modal para add um post novo e 
+ colocar um botao plus do lado direito no header da tela para adicionar novos posts.
+ 
+ ```
+- Possibilidade de editar e excluir um post próprio que foi publicado.
+ ```
+ Concluído com conforme descrito
+ ```
+- Ao logar no app, na tela pela vez deverá trazer alguns posts (fake) de seus
+colegas;
+ ```
+ Concluído com conforme descrito, registros que outras pessoas nao logadas no App nao pode ser excluidos ou editados, e o post da pessoa logada se destaca por uma cor difente de fundo
+ ```
+ 
+ - Tests unitários tive problema com os testes unitários, incompatibilidade de com o vector-icons (resolvido), mas com outros problemas que devido ao tempo para entrega do app não consegui concluir e executar testes mais elaborados
 
 ## App Screen
 ![Simulator Screen Shot - iPhone 12 - 2021-05-12 at 12 39 05](https://user-images.githubusercontent.com/12579082/118005582-e2c7c380-b320-11eb-9646-54b5892ead97.png)
@@ -93,6 +138,22 @@ Descrição da disposição da arquitetura, foi utilizado a sufixo VK - sigla de
 ```
 
 
-#Antes de rodar o projeto
+## Rodando o projeto 
+### Versões utilizadas:
 
-`yarn && npx pod-install`
+React Native: 0.64.0
+
+Xcode: 12.5
+
+Android Studio: 4.2 
+
+Java: 15
+
+
+Reconstruir strutura run `yarn clean && yarn pod` or `yarn && npx pod-install`, mas o script de clean faz algums procedimentos que auxiliam
+a iniciar o projeto sem cache no computador que ira executar
+
+- Run iOS: `yarn ios`
+- Run Android: `yarn android`
+
+
