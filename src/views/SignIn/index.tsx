@@ -89,7 +89,7 @@ const SignIn = () => {
                                 onChangeText(text, 'password')
                             }
                             autoCapitalize="none"
-                            placeholder="********"
+                            placeholder="Senha"
                             secureTextEntry
                             autoCompleteType="password"
                         />
