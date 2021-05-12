@@ -5,4 +5,12 @@ const IconVK = styled(IconFA).attrs(({ theme }) => ({
     color: theme.primaryColor,
 }))``;
 
-export { IconVK };
+const InputError = styled.Text`
+    color: ${(props: any) => props.theme.inputError.color};
+    font-size: ${(props: any) => props.theme.inputError.fontSize}px;
+    height: 20px;
+    margin-left: 15px;
+    flex-direction: row;
+`;
+
+export { IconVK, InputError };

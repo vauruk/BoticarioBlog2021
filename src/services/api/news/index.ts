@@ -1,4 +1,4 @@
-import { NewsResponse } from '../../../store/blog/types';
+import { NewsResponse } from '../../../store/news/types';
 import HttpClient from '../../ApiVK';
 
 interface NewsParameter {}

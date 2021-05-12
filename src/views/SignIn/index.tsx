@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
     Container,
@@ -14,16 +14,16 @@ import {
     ScrollViewAppVk,
 } from './styles';
 
-import { IconVK } from '../common/styles';
+import { IconVK, InputError } from '../common/styles';
 import { Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import boticario from '../../assets/gb.png';
 import { SignInRoutes } from '../../routes/SignIn/types';
 import { useAppDispatch, useTypedSelector } from '../../store';
-import { authorize, setField } from '../../store/login';
+import { authenticate, setField, startAdmin } from '../../store/login';
 import { userAlertVK } from '../../hooks';
 
-const SignIn = props => {
+const SignIn = () => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch();
     const username = useTypedSelector(state => state.loginForm.fields.username);
@@ -48,8 +48,13 @@ const SignIn = props => {
         dispatch(setField({ fieldName: fieldName, value: text }));
     };
     const onAutorize = () => {
-        dispatch(authorize());
+        dispatch(authenticate());
     };
+
+    useEffect(() => {
+        dispatch(startAdmin());
+    });
+
     return (
         <Container>
             {alert}
@@ -69,12 +74,14 @@ const SignIn = props => {
                             onChangeText={(text: string) =>
                                 onChangeText(text, 'username')
                             }
+                            value={username.value}
                             placeholder="Email"
                             keyboardType="email-address"
                             autoCapitalize="none"
                             maxLength={100}
                         />
                     </InputView>
+                    <InputError>{}</InputError>
                     <InputView testID="testId16">
                         <IconVK name="key" size={20} />
                         <TextInput
@@ -87,6 +94,8 @@ const SignIn = props => {
                             autoCompleteType="password"
                         />
                     </InputView>
+                    <InputError>{}</InputError>
+
                     <Button testID="testId16" onPress={onAutorize}>
                         <ButtonLabel>Login</ButtonLabel>
                     </Button>

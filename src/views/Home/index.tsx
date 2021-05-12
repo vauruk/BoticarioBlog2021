@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container, Title } from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { Container } from './styles';
 import { BlogList, BlogSend } from '../../views';
 
 const Home = () => {

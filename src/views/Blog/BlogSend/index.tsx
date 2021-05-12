@@ -5,10 +5,11 @@
  * @linkedin https://www.linkedin.com/in/vauruk/
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Keyboard } from 'react-native';
 import { useAppDispatch, useTypedSelector } from '../../../store';
 import { Alert } from 'react-native';
-import { setPostTextAction, addPost } from '../../../store/blog';
+import { setPostTextAction, addPost, saveEditPost } from '../../../store/blog';
 import {
     Container,
     ContentFooter,
@@ -26,23 +27,25 @@ const BlogSend = () => {
     const dispatch = useAppDispatch();
     const valueSize = count;
     const username = useTypedSelector(state => state.loginForm.fields.username);
+    const blog = useTypedSelector(state => state.blogForm.blog);
     const [sizeText, setSizeText] = useState(valueSize);
     const [saveDisable, setSaveDisable] = useState(false);
 
     const textPost = useTypedSelector(state => state.blogForm.textPost);
 
-    console.log('textPost', textPost);
     const handleSendPost = () => {
         if (textPost && sizeText <= valueSize) {
-            // if (uid) {
-            //     dispatch(editPostAction(textPost, uid));
-            // } else {
-            //     dispatch(savePostAction(textPost));
-            // }
-            dispatch(addPost({ value: textPost, email: username?.value }));
+            if (blog?.message.uuid && blog?.message.uuid > 0) {
+                dispatch(
+                    saveEditPost({ value: textPost, email: username?.value }),
+                );
+            } else {
+                dispatch(addPost({ value: textPost, email: username?.value }));
+            }
             setSizeText(valueSize);
             setSaveDisable(false);
             dispatch(setPostTextAction({ value: '' }));
+            Keyboard.dismiss();
         } else if (!textPost) {
             Alert.alert(
                 'Error',
@@ -58,7 +61,7 @@ const BlogSend = () => {
         }
     };
 
-    const handleChangeValue = value => {
+    const handleChangeValue = (value: string) => {
         let newSize = valueSize - value.length;
         if (value) {
             setSizeText(newSize);
@@ -66,7 +69,7 @@ const BlogSend = () => {
             setSizeText(valueSize);
         }
         setSaveDisable(newSize <= 0);
-        dispatch(setPostTextAction({ value }));
+        dispatch(setPostTextAction({ value: value }));
     };
 
     return (

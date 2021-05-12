@@ -1,12 +1,11 @@
 import styled from 'styled-components/native';
-import { KeyboardAvoidingView, Pressable } from 'react-native';
-import { ITheme } from '../../theme/types';
+import { Pressable } from 'react-native';
 import { ContainerVK, ColVK, RowVK, ScrollViewVK } from '../../components';
 
-const Container = styled(ContainerVK).attrs()``;
+const Container = styled(ContainerVK).attrs({})``;
 
 const Content = styled.View`
-    background-color: #e2e3e2;
+    background-color: ${(props: any) => props.theme.gray2};
     padding: 30px;
     border-radius: 10px;
     width: 90%;
@@ -29,18 +28,14 @@ const InputView = styled.View`
     padding-right: 10px;
 `;
 
-const Title = styled.Text<ITheme>`
+const Title = styled.Text`
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;
-`;
-
-const SubTitle = styled.Text<ITheme>`
-    color: ${(props: any) => props.theme.title.color};
-    font-size: ${(props: any) => props.theme.title.fontSize}px;
+    margin-top: 20px;
 `;
 
 const Button = styled.TouchableOpacity`
-    background-color: #909090;
+    background-color: ${(props: any) => props.theme.bgButtonColor};
     padding: 10px;
     border-radius: 20px;
     justify-content: center;
@@ -65,13 +60,6 @@ const LinkLabel = styled.Text`
     color: ${(props: any) => props.theme.black};
 `;
 
-const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
-    keyboardVerticalOffset: 10,
-    behavior: 'padding',
-})`
-    flex: 1;
-`;
-
 const HandlerContainer = styled(Pressable)`
     flex: 1;
 `;
@@ -90,7 +78,6 @@ const ScrollViewAppVk = styled(ScrollViewVK).attrs({})``;
 export {
     Container,
     Title,
-    SubTitle,
     ScrollViewAppVk,
     Button,
     Content,
@@ -102,6 +89,5 @@ export {
     Row,
     ColA,
     ColB,
-    WrapperKeyboard,
     HandlerContainer,
 };

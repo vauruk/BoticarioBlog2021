@@ -1,59 +1,35 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FormState, TextPost, Blog, User, Message } from './types';
-import md5 from 'crypto-js/md5';
+
 import moment from 'moment-timezone';
 import { blogList } from '../mock/blogList';
-
-const loadGravatar = (email: string) => {
-    const gravatarUrl = 'https://www.gravatar.com/avatar/';
-    // let hashGravatar = crypto.createHash('md5').update(email).digest("hex");
-    let hashGravatar = md5(email);
-    let url = gravatarUrl + hashGravatar + '?d=mp&s=50';
-    return url;
-};
+import loadGravatar from '../../util/gravatar';
 
 export const initialState: FormState = {
     loading: false,
     submitError: undefined,
     blogList: blogList,
     post: undefined,
+    blog: undefined,
     textPost: '',
 };
 
-export const fetchBlogList = createAsyncThunk(
-    'blogForm/list',
-    async (args = undefined, thunkAPI) => {
-        const {
-            blogListForm: { blogList },
-        } = thunkAPI.getState() as RootState;
-
-        try {
-            /**
-             * Aqui seria o ponto que se conecta com os serviços se necessario
-             */
-            // const dataReturn = BlogService.listData();
-            // return dataReturn;
-        } catch (error) {
-            const {
-                response: { data },
-            } = error;
-            return thunkAPI.rejectWithValue({ ...data });
-        }
-    },
-);
+const returnIndexObj = (blogList: [Blog], uuid: number) => {
+    const indexOf = blogList.findIndex(item => item.message.uuid === uuid);
+    return indexOf;
+};
 
 export const blogFormSlice = createSlice({
     name: 'blogForm',
     initialState,
     reducers: {
-        setPostTextAction(state, action: PayloadAction<TextPost>) {
+        setPostTextAction(state: FormState, action: PayloadAction<TextPost>) {
             const { value } = action.payload;
             const newstate = { ...state };
             newstate.textPost = value;
             return newstate;
         },
-        addPost(state, action: PayloadAction<TextPost>) {
+        addPost(state: FormState, action: PayloadAction<TextPost>) {
             const { value, email } = action.payload;
             const user: User = {
                 name: email.substring(0, email.indexOf('@')),
@@ -69,38 +45,46 @@ export const blogFormSlice = createSlice({
                 message,
                 user,
             };
-            console.log('addPost', blog);
             const newstate = { ...state };
+            newstate.blog = undefined;
             newstate.blogList.push(blog);
         },
-    },
-    extraReducers: (builder: any) => {
-        builder.addCase(fetchBlogList.pending, (state: FormState) => {
+        saveEditPost(state: FormState, action: PayloadAction<TextPost>) {
+            const { value } = action.payload;
             const newstate = { ...state };
-            newstate.submitError = undefined;
-            newstate.loading = true;
-        });
-        builder.addCase(
-            fetchBlogList.fulfilled,
-            (state: FormState, action: PayloadAction<NewsResponse>) => {
-                const newstate = { ...state };
-                const { news } = action.payload;
-                console.log('authorize.fulfilled', news);
-                newstate.submitError = undefined;
-                newstate.blogList = news;
+            const { blog, blogList } = newstate;
 
-                newstate.loading = false;
-                return newstate;
-            },
-        );
-        builder.addCase(fetchBlogList.rejected, (state: FormState) => {
+            const indexOf = returnIndexObj(blogList, blog?.message.uuid);
+            blogList[indexOf].message.content = value;
+        },
+
+        deletePost(state: FormState, action: PayloadAction<Blog>) {
+            const {
+                message: { uuid },
+            } = action.payload;
             const newstate = { ...state };
-            newstate.submitError = 'Error qualquer ';
-            newstate.loading = false;
-        });
+            const indexOf = returnIndexObj(newstate.blogList, uuid);
+            newstate.blog = undefined;
+            newstate.blogList.splice(indexOf, 1);
+        },
+
+        editPost(state: FormState, action: PayloadAction<Blog>) {
+            const newstate = { ...state };
+            const item = action.payload;
+            console.log('editPost', item);
+            newstate.blog = item;
+            newstate.textPost = item.message.content;
+            return newstate;
+        },
     },
 });
 
-export const { setPostTextAction, addPost } = blogFormSlice.actions;
+export const {
+    setPostTextAction,
+    addPost,
+    deletePost,
+    editPost,
+    saveEditPost,
+} = blogFormSlice.actions;
 
 export default blogFormSlice.reducer;

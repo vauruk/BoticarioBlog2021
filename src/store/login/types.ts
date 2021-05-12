@@ -1,8 +1,10 @@
 import { Field } from '../common/types';
 import { TypeMessage } from '../../components/AlertVK/types';
+import { User } from '../register/types';
 export interface FormState {
     loading: boolean;
     token: string | undefined;
+    user: User | undefined;
     submitError: string | undefined;
     typeMessage: TypeMessage;
     fields: {
@@ -17,6 +19,6 @@ export interface SetFieldPayload {
 }
 
 export interface AutorizeResponse {
-    name: string;
     token: string;
+    user: User;
 }

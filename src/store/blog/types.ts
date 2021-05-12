@@ -23,10 +23,11 @@ export interface FormState {
     blogList: [Blog];
     post: Message | undefined;
     textPost: string;
+    blog: Blog | undefined;
 }
 export type SetPayloadMessage = Message;
 
 export interface TextPost {
     value: string;
-    email: string | undefined;
+    email?: string | undefined;
 }

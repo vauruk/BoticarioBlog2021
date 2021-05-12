@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Container, ScrollViewAppVk } from './styles';
-import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useTypedSelector } from '../../store';
 import { ItemNewsVK } from '../../components';
 import { fetchNewsList } from '../../store/news';
+import { News } from '../../store/news/types';
 
 const NewsList = () => {
-    const navigation = useNavigation();
     const dispatch = useAppDispatch();
     const newsList = useTypedSelector(state => state.newsForm.newsList);
 
@@ -20,7 +19,7 @@ const NewsList = () => {
         <Container>
             <ScrollViewAppVk>
                 {newsList &&
-                    newsList.map((item, index) => (
+                    newsList.map((item: News, index: number) => (
                         <ItemNewsVK news={item} key={index} />
                     ))}
             </ScrollViewAppVk>

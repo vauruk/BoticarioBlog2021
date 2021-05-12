@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'store';
-import { FormState, SetFieldPayload } from './types';
+import { RootState } from '../reducers';
+import { FormState, SetFieldPayload, RegisterResponse, User } from './types';
 import { Field } from '../common/types';
+import { UserService } from '../../services';
 
 const initialFieldState: Field = {
     value: undefined,
@@ -9,14 +10,18 @@ const initialFieldState: Field = {
     isValid: false,
 };
 
+const fields = {
+    name: initialFieldState,
+    email: initialFieldState,
+    password: initialFieldState,
+    retryPassword: initialFieldState,
+};
+
 export const initialState: FormState = {
     loading: false,
     submitError: undefined,
-    fields: {
-        name: initialFieldState,
-        email: initialFieldState,
-        password: initialFieldState,
-    },
+    registerOk: undefined,
+    fields: fields,
 };
 
 export const register = createAsyncThunk(
@@ -26,11 +31,21 @@ export const register = createAsyncThunk(
             registerForm: { fields },
         } = thunkAPI.getState() as RootState;
         const { name, email, password } = fields;
-        console.log('Register', name, password, email);
+        const user: User = {
+            name: name.value,
+            email: email.value,
+            password: password.value,
+        };
         try {
-            setTimeout(() => {
-                console.log('object return payload');
-            }, 5000);
+            const userAdd = await UserService.addUser(user);
+            console.log('object return payload');
+            if (userAdd) {
+                return {
+                    value: 'Cadastrado com Sucesso',
+                    code: 2000,
+                    user: userAdd,
+                } as RegisterResponse;
+            }
         } catch (error) {
             const {
                 response: { data },
@@ -44,14 +59,56 @@ export const registerFormSlice = createSlice({
     name: 'registerForm',
     initialState,
     reducers: {
-        setField(state, action: PayloadAction<SetFieldPayload>) {
+        setField(state: FormState, action: PayloadAction<SetFieldPayload>) {
             const { fieldName, value } = action.payload;
             const field = state.fields[fieldName];
             field.value = value;
         },
-        logout(state) {
-            const newState = { ...state };
-            //  newState.hasCredentials = 'dsad';
+        cleanState(state: FormState) {
+            const newstate = { ...state };
+            newstate.registerOk = undefined;
+            newstate.fields = fields;
+            return newstate;
+        },
+        validateField(
+            state: FormState,
+            action: PayloadAction<SetFieldPayload>,
+        ) {
+            const { fieldName, value } = action.payload;
+            const field = state.fields[fieldName];
+            switch (fieldName) {
+                case 'name':
+                    const nameEr = new RegExp(/(\w.+\s).+/);
+                    if (!nameEr.test(value)) {
+                        field.error = 'Nome inválido.';
+                    } else {
+                        field.error = undefined;
+                    }
+                    break;
+                case 'email':
+                    const nameErEmail = new RegExp(/\S+@\S+\.\S+/);
+                    if (!value?.match(nameErEmail)) {
+                        field.error = 'Email inválido.';
+                    } else {
+                        field.error = undefined;
+                    }
+                    break;
+                case 'password':
+                    if (value?.length <= 5) {
+                        field.error = 'Senha deve no minimo 6 digitos.';
+                    } else {
+                        field.error = undefined;
+                    }
+                    break;
+                case 'retryPassword':
+                    const fieldPassword = state.fields['password'];
+                    if (value !== fieldPassword.value) {
+                        field.error = 'Senhas não conferem.';
+                    } else {
+                        field.error = undefined;
+                    }
+                    break;
+            }
         },
     },
     extraReducers: (builder: any) => {
@@ -60,19 +117,29 @@ export const registerFormSlice = createSlice({
             newstate.submitError = undefined;
             newstate.loading = true;
         });
-        builder.addCase(register.fulfilled, (state: FormState) => {
-            const newstate = { ...state };
-            newstate.submitError = undefined;
-            newstate.loading = false;
-        });
+        builder.addCase(
+            register.fulfilled,
+            (state: FormState, action: PayloadAction<RegisterResponse>) => {
+                const newstate = { ...state };
+                const { value, code } = action.payload;
+                newstate.submitError = undefined;
+                newstate.loading = false;
+                newstate.registerOk = code;
+                return newstate;
+            },
+        );
         builder.addCase(register.rejected, (state: FormState) => {
             const newstate = { ...state };
-            newstate.submitError = 'Error qualquer ';
+            newstate.submitError = 'Error qualquer';
             newstate.loading = false;
         });
     },
 });
 
-export const { setField, logout } = registerFormSlice.actions;
+export const {
+    setField,
+    validateField,
+    cleanState,
+} = registerFormSlice.actions;
 
 export default registerFormSlice.reducer;

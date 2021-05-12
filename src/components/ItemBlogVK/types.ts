@@ -1,9 +1,11 @@
 import { StyleProp, ViewStyle } from 'react-native';
-import { News } from '../../store/blog/types';
+import { Blog } from '../../store/blog/types';
 
 export interface Props {
     testID?: string;
     style?: StyleProp<ViewStyle>;
-    news?: News;
-    me: boolean;
+    blog: Blog;
+    isMe: boolean;
+    onEdit?: (item: Blog) => void;
+    onDelete?: (item: Blog) => void;
 }

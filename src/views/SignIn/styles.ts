@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
-import { KeyboardAvoidingView, Pressable, Platform } from 'react-native';
-import { ITheme } from '../../theme/types';
+import { Pressable } from 'react-native';
 import { ContainerVK, ImageVK, ScrollViewVK } from '../../components';
 
-const Container = styled(ContainerVK).attrs()``;
-const ImageSignVK = styled(ImageVK).attrs()`
+const Container = styled(ContainerVK).attrs({})``;
+const ImageSignVK = styled(ImageVK).attrs({})`
     margin-top: 20px;
 `;
 
@@ -35,23 +34,23 @@ const InputView = styled.View`
     padding-right: 10px;
 `;
 
-const Title = styled.Text<ITheme>`
+const Title = styled.Text`
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;
 `;
 
-const SubTitle = styled.Text<ITheme>`
+const SubTitle = styled.Text`
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;
 `;
 
 const Button = styled.TouchableOpacity`
-    background-color: #909090;
+    background-color: ${(props: any) => props.theme.bgButtonColor};
     padding: 10px;
     border-radius: 20px;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
 `;
 const ButtonLink = styled.TouchableOpacity`
     padding: 10px;
@@ -67,14 +66,7 @@ const ButtonLabel = styled.Text`
 
 const LinkLabel = styled.Text`
     font-size: 15px;
-    color: ${(props: any) => props.theme.blue};
-`;
-
-const WrapperKeyboard = styled(KeyboardAvoidingView).attrs({
-    keyboardVerticalOffset: 500,
-    behavior: Platform.OS === 'ios' ? 'padding' : 'height',
-})`
-    flex: 1;
+    color: ${(props: any) => props.theme.primaryColor};
 `;
 
 const HandlerContainer = styled(Pressable)`
@@ -96,6 +88,5 @@ export {
     LinkLabel,
     ButtonLabel,
     ButtonLink,
-    WrapperKeyboard,
     HandlerContainer,
 };

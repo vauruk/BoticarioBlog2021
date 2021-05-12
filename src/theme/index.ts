@@ -3,8 +3,9 @@ import { ITheme } from './types';
 const color = {
     primary: '#ec771a',
     secondary: '#ffee44',
+    bgButton: '#909090',
     gray: '#334455',
-    gray2: '#ebebeb',
+    gray2: '#e2e3e2',
     ligthGray: '#d2d2d2',
     white: '#fffeff',
     black: '#000000',
@@ -22,6 +23,7 @@ const theme: ITheme = {
     black: color.black,
     blue: color.blue,
     gray2: color.gray2,
+    bgButtonColor: color.bgButton,
     errorColor: color.error,
     warningColor: color.warning,
     successColor: color.success,
@@ -45,6 +47,10 @@ const theme: ITheme = {
     titleHeader: {
         fontSize: 40,
         color: color.primary,
+    },
+    inputError: {
+        fontSize: 13,
+        color: color.error,
     },
 };
 

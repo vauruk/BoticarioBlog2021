@@ -1,5 +1,4 @@
 import { Blog, User, Message } from '../blog/types';
-import { uuid } from 'uuidv4';
 
 const user1: User = {
     name: 'Jorge Silva',

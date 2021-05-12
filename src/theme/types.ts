@@ -2,6 +2,7 @@ export interface ITheme {
     primaryColor: string;
     secondaryColor: string;
     backgroundColor: string;
+    bgButtonColor: string;
     white: string;
     black: string;
     blue: string;
@@ -10,8 +11,12 @@ export interface ITheme {
     errorColor: string;
     successColor: string;
     warningColor: string;
+    text: TitleText;
+    blogText: TitleText;
+    smallText: TitleText;
     titleHeader: TitleText;
     title: TitleText;
+    inputError: TitleText;
 }
 
 export interface TitleText {

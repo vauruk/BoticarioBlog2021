@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { ActivityIndicator } from 'react-native';
-import { ITheme } from '../../theme/types';
 import { RowVK, ColVK } from '../../components';
 
 const Container = styled.View`
@@ -16,7 +15,7 @@ const Content = styled.View`
     align-items: center;
 `;
 
-const Title = styled.Text<ITheme>`
+const Title = styled.Text`
     padding-top: 15px;
     color: ${(props: any) => props.theme.title.color};
     font-size: ${(props: any) => props.theme.title.fontSize}px;

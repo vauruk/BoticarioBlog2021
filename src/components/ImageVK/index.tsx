@@ -6,7 +6,6 @@ import empty from '../../assets/empty.png';
 const ImageVK: React.FC<Props> = ({
     testID,
     source,
-    style,
     width = 200,
     height = 200,
 }: Props) => {
@@ -14,7 +13,6 @@ const ImageVK: React.FC<Props> = ({
         <>
             <ContentVK testID={testID}>
                 <ImageStyledVK
-                    style={style}
                     source={source}
                     width={width}
                     height={height}

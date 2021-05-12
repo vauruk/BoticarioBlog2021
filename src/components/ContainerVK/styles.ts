@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { KeyboardAvoidingView, Pressable } from 'react-native';
+import { KeyboardAvoidingView, Pressable, Platform } from 'react-native';
 
 const ContainerVK = styled.View`
     background-color: ${(props: any) => props.theme.backgroundColor};
@@ -7,8 +7,8 @@ const ContainerVK = styled.View`
 `;
 
 const KeyboardAvoidingViewVK = styled(KeyboardAvoidingView).attrs({
-    keyboardVerticalOffset: 10,
-    behavior: 'padding',
+    keyboardVerticalOffset: 64,
+    behavior: Platform.OS === 'ios' ? 'padding' : 'height',
 })`
     flex: 1;
 `;

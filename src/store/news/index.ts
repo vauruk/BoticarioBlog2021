@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'store';
-import { FormState, SetPayloadMessage, NewsResponse } from './types';
+import { RootState } from '../reducers';
+import { FormState, NewsResponse } from './types';
 import { NewsService } from '../../services';
 
 export const initialState: FormState = {

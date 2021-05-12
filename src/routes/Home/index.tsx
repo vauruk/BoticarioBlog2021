@@ -9,6 +9,7 @@ const Drawer = createDrawerNavigator<HomeDrawerParamsList>();
 
 const HomeNavigator = () => (
     <Drawer.Navigator
+        drawerLabel={'teste'}
         drawerContentOptions={{
             activeTintColor: theme.ligthGrayColor,
             // itemStyle: { marginVertical: 30 },
