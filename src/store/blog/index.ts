@@ -71,7 +71,6 @@ export const blogFormSlice = createSlice({
         editPost(state: FormState, action: PayloadAction<Blog>) {
             const newstate = { ...state };
             const item = action.payload;
-            console.log('editPost', item);
             newstate.blog = item;
             newstate.textPost = item.message.content;
             return newstate;

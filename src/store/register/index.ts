@@ -38,7 +38,6 @@ export const register = createAsyncThunk(
         };
         try {
             const userAdd = await UserService.addUser(user);
-            console.log('object return payload');
             if (userAdd) {
                 return {
                     value: 'Cadastrado com Sucesso',
@@ -81,31 +80,39 @@ export const registerFormSlice = createSlice({
                     const nameEr = new RegExp(/(\w.+\s).+/);
                     if (!nameEr.test(value)) {
                         field.error = 'Nome inválido.';
+                        field.isValid = false;
                     } else {
                         field.error = undefined;
+                        field.isValid = true;
                     }
                     break;
                 case 'email':
                     const nameErEmail = new RegExp(/\S+@\S+\.\S+/);
                     if (!value?.match(nameErEmail)) {
                         field.error = 'Email inválido.';
+                        field.isValid = false;
                     } else {
                         field.error = undefined;
+                        field.isValid = true;
                     }
                     break;
                 case 'password':
                     if (value?.length <= 5) {
+                        field.isValid = false;
                         field.error = 'Senha deve no minimo 6 digitos.';
                     } else {
                         field.error = undefined;
+                        field.isValid = true;
                     }
                     break;
                 case 'retryPassword':
                     const fieldPassword = state.fields['password'];
                     if (value !== fieldPassword.value) {
                         field.error = 'Senhas não conferem.';
+                        field.isValid = false;
                     } else {
                         field.error = undefined;
+                        field.isValid = true;
                     }
                     break;
             }

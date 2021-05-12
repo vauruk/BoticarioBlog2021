@@ -35,7 +35,6 @@ export const authenticate = createAsyncThunk(
                 password.value,
             );
 
-            console.log('userReturn', userReturn);
             if (userReturn) {
                 const token: string = md5(username.value).toString();
                 return {

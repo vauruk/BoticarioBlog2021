@@ -24,7 +24,7 @@ import {
     register,
     cleanState,
 } from '../../store/register';
-import { authorize, setField as setFieldLogin } from '../../store/login';
+import { setField as setFieldLogin } from '../../store/login';
 
 const Register = () => {
     const navigation = useNavigation();
@@ -65,7 +65,6 @@ const Register = () => {
     }, [email.value]);
 
     useEffect(() => {
-        // console.log('object', name.value);
         if (name.value) {
             dispatch(
                 validateField({
@@ -99,9 +98,7 @@ const Register = () => {
     }, [retryPassword.value]);
 
     useEffect(() => {
-        console.log('useEffect registerOk', registerOk, registerOk === 2000);
         if (registerOk === 2000) {
-            console.log('useEffect registerOk', registerOk);
             dispatch(
                 setFieldLogin({ fieldName: 'password', value: password.value }),
             );
@@ -171,7 +168,16 @@ const Register = () => {
                     <InputError>{retryPassword.error}</InputError>
                     <Row>
                         <ColA flex={0.5}>
-                            <Button onPress={handleSaveUser}>
+                            <Button
+                                disabled={
+                                    !(
+                                        name.isValid &&
+                                        email.isValid &&
+                                        password.isValid &&
+                                        retryPassword.isValid
+                                    )
+                                }
+                                onPress={handleSaveUser}>
                                 <ButtonLabel>Cadastrar</ButtonLabel>
                             </Button>
                         </ColA>

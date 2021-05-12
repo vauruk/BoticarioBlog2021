@@ -34,14 +34,18 @@ const Title = styled.Text`
     margin-top: 20px;
 `;
 
-const Button = styled.TouchableOpacity`
-    background-color: ${(props: any) => props.theme.bgButtonColor};
+const Button = styled.TouchableOpacity.attrs(({ disabled }) => ({
+    disabled: disabled,
+}))`
+    background-color: ${({ theme, disabled }) =>
+        disabled ? theme.ligthGrayColor : theme.bgButtonColor};
     padding: 10px;
     border-radius: 20px;
     justify-content: center;
     align-items: center;
     width: 110%;
 `;
+
 const ButtonLink = styled.TouchableOpacity`
     margin-top: 10px;
     padding: 10px;

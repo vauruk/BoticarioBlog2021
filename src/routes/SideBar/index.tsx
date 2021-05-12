@@ -21,7 +21,6 @@ const CustomDrawerContent = props => {
         dispatch(logout());
     };
 
-    console.log('username', username.value);
     return (
         <>
             <DrawerContentScrollView {...props}>
