@@ -155,6 +155,8 @@ a iniciar o projeto sem cache no computador que ira executar
 
 - Run iOS: `yarn ios`
 - Run Android: `yarn android`
+- Run test: `yarn test`
+- Run ts: `yarn ts:compile` - validar tipagem no TS
 
 ## Distro
 - Foi criado uma pasta na raiz do projeto com um APK para testes:
