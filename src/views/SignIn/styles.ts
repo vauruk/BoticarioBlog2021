@@ -8,7 +8,7 @@ const ImageSignVK = styled(ImageVK).attrs({})`
 `;
 
 const Content = styled.View`
-    background-color: #e2e3e2;
+    background-color: ${(props: any) => props.theme.gray2};
     padding: 30px;
     border-radius: 10px;
     width: 90%;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Props } from './types';
 import { ContentVK } from './styles';
 
-const AlertVK: React.FC<Props> = ({
+const ColVK: React.FC<Props> = ({
     testID,
     style,
     children,
@@ -17,4 +17,4 @@ const AlertVK: React.FC<Props> = ({
     );
 };
 
-export default AlertVK;
+export default ColVK;

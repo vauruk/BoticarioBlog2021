@@ -11,6 +11,7 @@ const color = {
     black: '#000000',
     blue: '#1A3668',
     error: '#AF4141',
+    red: '#ee4433',
     success: '#82BA91',
     warning: '#F7AB00',
 };
@@ -23,6 +24,7 @@ const theme: ITheme = {
     black: color.black,
     blue: color.blue,
     gray2: color.gray2,
+    red: color.red,
     bgButtonColor: color.bgButton,
     errorColor: color.error,
     warningColor: color.warning,

@@ -55,7 +55,7 @@ const TextInput = styled.TextInput.attrs({})`
 `;
 
 const ButtonSend = styled.TouchableOpacity`
-    background-color: #ffff;
+    background-color: ${(props: any) => props.theme.white};
     padding: 10px;
     border-radius: 20px;
 `;

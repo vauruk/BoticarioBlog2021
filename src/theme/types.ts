@@ -13,6 +13,7 @@ export interface ITheme {
     warningColor: string;
     text: TitleText;
     blogText: TitleText;
+    red: TitleText;
     smallText: TitleText;
     titleHeader: TitleText;
     title: TitleText;

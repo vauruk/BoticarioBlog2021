@@ -19,7 +19,7 @@ const Label = styled.Text`
 `;
 
 const Button = styled.TouchableOpacity`
-    background-color: #ee4433;
+    background-color: ${(props: any) => props.theme.red};
     padding: 10px;
 `;
 
